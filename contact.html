@@ -1,0 +1,49 @@
+<!-- Place below your contact form -->
+<script>
+    document.getElementById('contact-form')//Replace ID with contact form css ID 
+    .addEventListener('submit', async function (e) { 
+        e.preventDefault(); // Prevent default form submission
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        // Show a loading message (optional)
+        const responseDiv = document.getElementById('form-response');
+        responseDiv.textContent = 'Sending...';
+        responseDiv.style.color = 'blue';
+
+        try {
+            const response = await fetch('contact_form_handler.php', {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+
+            // Display the response
+            responseDiv.textContent = result.message;
+            responseDiv.style.color = result.success ? 'green' : 'red';
+
+            // Clear the form if the message was sent successfully
+            if (result.success) form.reset();
+        } catch (error) {
+            responseDiv.textContent = 'An error occurred. Please try again later.';
+            responseDiv.style.color = 'red';
+        }
+    });
+</script>
+
+
+<!-- Add this past the footer(bottom) with other scripts -->
+
+<!-- Spam Prevention -->
+<script>
+function addHiddenCaptcha() {
+  const form = document.querySelector('form');
+  const hiddenField = document.createElement('input');
+  hiddenField.type = 'text';
+  hiddenField.name = 'hidden_captcha';
+  hiddenField.style.display = 'none';
+  hiddenField.value = '';
+  form.appendChild(hiddenField);
+}
+document.addEventListener('DOMContentLoaded', addHiddenCaptcha);</script>
