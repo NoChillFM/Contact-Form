@@ -1,9 +1,6 @@
 ## <a name="Contact Form"></a> Contact Form
 A simple PHP handler for an HTML contact form. Copy paste ready with simple instructions noted in the PHP and HTML file.
 
-![Contact Form](https://github.com/user-attachments/assets/6463c9e9-d3cf-4cf7-a7a5-0ac2488aacc7)
-
-
 ## <a name="features"></a> Features
 * Easy to implement
 * For HTML sites
