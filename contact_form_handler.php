@@ -21,12 +21,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
     $subject = filter_var(trim($_POST["subject"]), FILTER_SANITIZE_STRING);
     $message = filter_var(trim($_POST["message"]), FILTER_SANITIZE_STRING);
-
+    //Ban words for better spam prevention
+    $bannedWords = ['http://', 'https://', 'buy now', 'click here', 'video'];
+         foreach ($bannedWords as $word) {
+    if (strpos($message, $word) !== false) {
+        echo json_encode(['success' => false, 'message' => 'Spam detected in the message.']);
+        exit;
+    }
+}
     if (empty($name) || empty($email) || empty($subject) || empty($message)) {
         echo json_encode(['success' => false, 'message' => 'All fields are required.']);
         exit;
     }
-
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the user's IP address
+        $userIP = getUserIP();
+    // Check if the user is in the U.S.
+    if (!isUserFromUS($userIP)) {
+        echo json_encode(['success' => false, 'message' => 'Form submissions are restricted to the United States.']);
+        exit;
+    }
+}
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo json_encode(['success' => false, 'message' => 'Invalid email address.']);
         exit;
