@@ -13,6 +13,6 @@ A simple PHP handler for an HTML contact form. Copy paste ready with simple inst
 * Contact forms for recieving emails from customers direct from your website.
 
 ## <a name="server"></a>Server Side
-* <a name="java"></a>**Java**
+* <a name="java"></a>**PHPMailer**(https://github.com/PHPMailer/PHPMailer)
 * <a name="css"></a>**PHP**
 * <a name="html"></a>**HTML**
